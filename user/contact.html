@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color:#ffe6ea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .animated-ball {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+            filter: blur(2px);
+        }
+        
+        .ball-1 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #e94269 0%, #ff869a 100%);
+            opacity: 0.3;
+            top: 10%;
+            left: 10%;
+            animation: floatBall 10s infinite alternate ease-in-out;
+        }
+        
+        .ball-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #65558f 0%, #9a8bc5 100%);
+            opacity: 0.3;
+            bottom: 10%;
+            right: 10%;
+            animation: floatBall2 8s infinite alternate ease-in-out;
+        }
+        
+        .ball-3 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff869a 0%, #ffb7c5 100%);
+            opacity: 0.4;
+            top: 40%;
+            right: 20%;
+            animation: floatBall3 6s infinite alternate ease-in-out;
+        }
+        
+        .ball-4 {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #9a8bc5 0%, #c5b8e0 100%);
+            opacity: 0.3;
+            bottom: 20%;
+            left: 20%;
+            animation: floatBall4 7s infinite alternate ease-in-out;
+        }
+        
+        .ball-5 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e94269 0%, #ff869a 100%);
+            opacity: 0.2;
+            top: 60%;
+            left: 40%;
+            animation: floatBall5 5s infinite alternate ease-in-out;
+        }
+        
+        @keyframes floatBall {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(100px, 50px) scale(1.1);
+            }
+        }
+        
+        @keyframes floatBall2 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-80px, -50px) scale(0.9);
+            }
+        }
+        
+        @keyframes floatBall3 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-60px, 80px) scale(1.2);
+            }
+        }
+        
+        @keyframes floatBall4 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(70px, -60px) scale(0.8);
+            }
+        }
+        
+        @keyframes floatBall5 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-40px, 30px) scale(1.3);
+            }
+        }/* Background bubbles effect */
+       
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 450px;
+            z-index: 1;
+            animation: reveal 1s ease-out;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(93, 74, 142, 0.15);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: reveal 1s ease-out;
+        }
+        @keyframes reveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        h2, button, .contact-list, .empty-state {
+            animation: reveal 1s ease-out;
+        }
+        
+        h2 {
+            color: #5d4a8e;
+            margin-bottom: 20px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        button {
+            background-color: #5d4a8e;
+            color: white;
+            padding: 14px;
+            border: none;
+            margin: 20px 0 10px;
+            cursor: pointer;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 300px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(93, 74, 142, 0.2);
+        }
+        button:hover {
+            background-color: #4b3a72;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(93, 74, 142, 0.3);
+        }
+        .contact-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            width: 100%;
+        }
+        .contact-list li {
+            cursor: pointer;
+            padding: 14px 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+            color: #5d4a8e;
+            background-color: #f9f7fc;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            border: 1px solid rgba(93, 74, 142, 0.1);
+        }
+        .contact-list li:before {
+            content: "";
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: #5d4a8e;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .contact-list li:hover {
+            background-color: #efe9f7;
+            color: #4b3a72;
+            transform: translateX(5px);
+            box-shadow: 0 4px 8px rgba(93, 74, 142, 0.1);
+        }
+        .empty-state {
+            color: #999;
+            padding: 20px;
+            font-style: italic;
+            font-size: 16px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 10px;
+        }
+        .button-container button {
+            max-width: none;
+            flex: 1;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating-circles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, rgba(93, 74, 142, 0.2), rgba(216, 190, 230, 0.2));
+            animation: float 8s infinite ease-in-out;
+        }
+        .circle:nth-child(1) {
+            width: 150px;
+            height: 150px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        .circle:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            top: 60%;
+            left: 80%;
+            animation-delay: 2s;
+        }
+        .circle:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-ball ball-1"></div>
+    <div class="animated-ball ball-2"></div>
+    <div class="animated-ball ball-3"></div>
+    <div class="animated-ball ball-4"></div>
+    <div class="animated-ball ball-5"></div>
+    <div class="container">
+        <div class="card">
+            <h2>Contacts</h2>
+            <div id="contactListContainer">
+                <ul id="contactList" class="contact-list">
+                    <!-- Contacts will be loaded here -->
+                </ul>
+                <div id="emptyState" class="empty-state">No contacts found</div>
+            </div>
+            
+            <div class="button-container">
+                <button onclick="location.href='home.html'">Go Back</button>
+                <button id="addContactBtn" onclick="location.href='newcontact.html'">Add Contact</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Initialize empty contacts array and use localStorage to persist data
+        let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+        
+        function displayContactNames() {
+            let list = document.getElementById("contactList");
+            let emptyState = document.getElementById("emptyState");
+            
+            list.innerHTML = '';
+            
+            if (contacts.length === 0) {
+                // Show empty state message
+                emptyState.style.display = "block";
+                list.style.display = "none";
+                return;
+            }
+            
+            // Hide empty state and show contacts
+            emptyState.style.display = "none";
+            list.style.display = "block";
+            
+            contacts.forEach(contact => {
+                let item = document.createElement("li");
+                item.innerText = contact.name;
+                item.addEventListener('click', () => viewContact(contact));
+                list.appendChild(item);
+            });
+        }
+        
+        function viewContact(contact) {
+            alert(`Name: ${contact.name}\nPhone: ${contact.phone || "No phone number"}`);
+        }
+        
+        // Initialize on page load
+        window.onload = displayContactNames;
+    </script>
+     <script>
+        // Interactive background elements
+        document.addEventListener('mousemove', function(e) {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const balls = document.querySelectorAll('.animated-ball');
+            
+            balls.forEach((ball, index) => {
+                const speed = 20 + (index * 5);
+                ball.style.transform = `translate(${x * speed - speed/2}px, ${y * speed - speed/2}px) scale(${1 + y * 0.1})`;
+                ball.style.transition = 'transform 0.3s ease-out';
+            });
+        });
+        
+        // For touch devices
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                const x = touch.clientX / window.innerWidth;
+                const y = touch.clientY / window.innerHeight;
+                
+                const balls = document.querySelectorAll('.animated-ball');
+                
+                balls.forEach((ball, index) => {
+                    const speed = 20 + (index * 5);
+                    ball.style.transform = `translate(${x * speed - speed/2}px, ${y * speed - speed/2}px) scale(${1 + y * 0.1})`;
+                    ball.style.transition = 'transform 0.3s ease-out';
+                });
+            }
+        });
+    </script>
+
+
+</body>
+</html>

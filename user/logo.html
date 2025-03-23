@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureLoom Logo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Lobster&family=Dancing+Script:wght@700&display=swap');
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            margin: 0;
+            overflow: hidden;
+            background-color: #ffe6ea;
+            animation: fadeOut 3s ease-in-out forwards 4s;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .logo-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .circle {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            opacity: 1;
+        }
+
+        .circle circle {
+            fill: none;
+            stroke: white;
+            stroke-width: 5;
+            stroke-dasharray: 942;
+            stroke-dashoffset: 942;
+            animation: drawCircle 1.5s ease-out forwards 2.5s;
+        }
+
+        @keyframes drawCircle {
+            from {
+                stroke-dashoffset: 942;
+            }
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        .logo {
+            position: relative;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .secure, .line, .loom {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            top:40px;
+            position: relative;
+        }
+        
+        .secure {
+            font-family: 'Lobster', cursive;
+            font-size: 70px;
+            color: #e94269;
+            display: block;
+            margin-bottom: 5px;
+            top:10px;
+        }
+        
+        .line {
+            width: 160px;
+            height: 3px;
+            background-color: #e94269;
+            margin-bottom: 5px;
+            top: 5px;
+        }
+        
+        .loom {
+            font-family: 'Fredoka One', cursive;
+            font-size: 100px;
+            color: #f790b0;
+            margin-bottom: 1px;
+            top: -30px;
+        }
+        
+        .tagline {
+            font-family: 'Dancing Script', cursive;
+            font-size: 50px;
+            color: hotpink;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            margin-top: 40px;
+        }
+
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <svg class="circle" viewBox="0 0 300 300">
+            <circle cx="150" cy="150" r="145" />
+        </svg>
+        <div class="logo">
+            <div class="secure">Secure</div>
+            <div class="line"></div>
+            <div class="loom">Loom</div>
+        </div>
+    </div>
+    <div class="tagline">Safety Interwoven with Style</div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(() => document.querySelector(".secure").classList.add("show"), 500);
+            setTimeout(() => document.querySelector(".line").classList.add("show"), 1000);
+            setTimeout(() => document.querySelector(".loom").classList.add("show"), 1500);
+            setTimeout(() => document.querySelector(".tagline").classList.add("show"), 2000);
+            
+            // Redirect to homepage after animation
+            setTimeout(() => {
+                window.location.href = "welcome1.html";
+            }, 4000); // 4 seconds
+        });
+    </script>
+</body>
+</html>

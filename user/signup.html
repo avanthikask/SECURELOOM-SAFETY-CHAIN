@@ -1,0 +1,433 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety App - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: #ffe6ea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 400px;
+            padding: 40px 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1 {
+            color: #65558f;
+            margin-bottom: 30px;
+            font-size: 28px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        h1.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .welcome-text {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .welcome-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .form-group.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #65558f;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #65558f;
+            box-shadow: 0 0 0 2px rgba(101, 85, 143, 0.2);
+            outline: none;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #65558f;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #65558f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(101, 85, 143, 0.2);
+            margin-top: 10px;
+            position: relative;
+            top: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s, background-color 0.3s, box-shadow 0.3s, top 0.3s;
+        }
+
+        button.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        button:hover {
+            background-color: #7a6da7;
+            box-shadow: 0 6px 10px rgba(101, 85, 143, 0.3);
+        }
+
+        button:active {
+            top: -3px;
+            box-shadow: 0 2px 3px rgba(101, 85, 143, 0.2);
+        }
+
+        button:disabled {
+            background-color: #a499c2;
+            cursor: not-allowed;
+        }
+        button:disabled {
+            background-color: #a499c2;
+            cursor: not-allowed;
+        }
+
+        .forgot-password {
+            display: block;
+            margin-top: 15px;
+            color: #65558f;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        
+        @media (max-width: 768px) {
+            .container {
+                width: 85%;
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .ball {
+                opacity: 0.5;
+            }
+        }
+        .animated-ball {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+            filter: blur(2px);
+        }
+        
+        .ball-1 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #e94269 0%, #ff869a 100%);
+            opacity: 0.3;
+            top: 10%;
+            left: 10%;
+            animation: floatBall 10s infinite alternate ease-in-out;
+        }
+        
+        .ball-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #65558f 0%, #9a8bc5 100%);
+            opacity: 0.3;
+            bottom: 10%;
+            right: 10%;
+            animation: floatBall2 8s infinite alternate ease-in-out;
+        }
+        
+        .ball-3 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff869a 0%, #ffb7c5 100%);
+            opacity: 0.4;
+            top: 40%;
+            right: 20%;
+            animation: floatBall3 6s infinite alternate ease-in-out;
+        }
+        
+        .ball-4 {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #9a8bc5 0%, #c5b8e0 100%);
+            opacity: 0.3;
+            bottom: 20%;
+            left: 20%;
+            animation: floatBall4 7s infinite alternate ease-in-out;
+        }
+        
+        .ball-5 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e94269 0%, #ff869a 100%);
+            opacity: 0.2;
+            top: 60%;
+            left: 40%;
+            animation: floatBall5 5s infinite alternate ease-in-out;
+        }
+        
+        @keyframes floatBall {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(100px, 50px) scale(1.1);
+            }
+        }
+        
+        @keyframes floatBall2 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-80px, -50px) scale(0.9);
+            }
+        }
+        
+        @keyframes floatBall3 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-60px, 80px) scale(1.2);
+            }
+        }
+        
+        @keyframes floatBall4 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(70px, -60px) scale(0.8);
+            }
+        }
+        
+        @keyframes floatBall5 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-40px, 30px) scale(1.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-ball ball-1"></div>
+    <div class="animated-ball ball-2"></div>
+    <div class="animated-ball ball-3"></div>
+    <div class="animated-ball ball-4"></div>
+    <div class="animated-ball ball-5"></div><!-- Floating Balls -->
+    
+
+    <div class="container">
+        <h1>Welcome to 
+            Secure Loom
+        </h1>
+        <p class="welcome-text">Sign Up to access your secure account and stay connected to your safety network.</p>
+        
+        <form id="signInForm" onsubmit="return false;">
+            <div class="form-group">
+                <label for="name">User Name</label>
+                <input type="text" id="name">
+            </div>
+            <div class="form-group">
+                <label for="number">Phone Number</label>
+                <input type="tel" id="number">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email">
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password">
+                    <span class="toggle-password" onclick="togglePassword()">👁️</span>
+                </div>
+            </div>
+            
+            <button type="submit" id="signInButton" onclick="signin()">Sign Up</button>
+        </form>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        }
+        
+        function signin() {
+            const button = document.getElementById("signInButton");
+            
+            // Show saving state
+            button.textContent = "Please Wait...";
+            button.disabled = true;
+            
+            // Simulate saving process
+            setTimeout(() => {
+                button.textContent = "Signed up successfully!";
+                button.style.backgroundColor = "#65558f";
+                
+                // Redirect to home page after 2 seconds
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 2000); 
+            }, 1500);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements to animate
+            const container = document.querySelector('.container');
+            const h1 = document.querySelector('h1');
+            const welcomeText = document.querySelector('.welcome-text');
+            const formGroups = document.querySelectorAll('.form-group');
+            const button = document.querySelector('button');
+            
+            // Add visible class to container first
+            setTimeout(() => {
+                container.classList.add('visible');
+                
+                // Then animate the internal elements with staggered delays
+                setTimeout(() => {
+                    h1.classList.add('visible');
+                    
+                    setTimeout(() => {
+                        welcomeText.classList.add('visible');
+                        
+                        // Stagger the form groups
+                        formGroups.forEach((formGroup, index) => {
+                            setTimeout(() => {
+                                formGroup.classList.add('visible');
+                            }, index * 150);
+                        });
+                        
+                        // Finally show the button
+                        setTimeout(() => {
+                            button.classList.add('visible');
+                        }, formGroups.length * 150 + 100);
+                        
+                    }, 200);
+                }, 300);
+            }, 300);
+        });
+    </script>
+     <script>
+        // Interactive background elements
+        document.addEventListener('mousemove', function(e) {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            const balls = document.querySelectorAll('.animated-ball');
+            
+            balls.forEach((ball, index) => {
+                const speed = 20 + (index * 5);
+                ball.style.transform = `translate(${x * speed - speed/2}px, ${y * speed - speed/2}px) scale(${1 + y * 0.1})`;
+                ball.style.transition = 'transform 0.3s ease-out';
+            });
+        });
+        
+        // For touch devices
+        document.addEventListener('touchmove', function(e) {
+            if (e.touches.length > 0) {
+                const touch = e.touches[0];
+                const x = touch.clientX / window.innerWidth;
+                const y = touch.clientY / window.innerHeight;
+                
+                const balls = document.querySelectorAll('.animated-ball');
+                
+                balls.forEach((ball, index) => {
+                    const speed = 20 + (index * 5);
+                    ball.style.transform = `translate(${x * speed - speed/2}px, ${y * speed - speed/2}px) scale(${1 + y * 0.1})`;
+                    ball.style.transition = 'transform 0.3s ease-out';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
