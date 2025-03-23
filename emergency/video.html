@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Video Stream</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6ea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+        video {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 10px;
+            border: none;
+        }
+        .controls {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        button, input {
+            background-color: #5d4a8e;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+        button:hover {
+            background-color: #4b3a72;
+        }
+        .animated-ball {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1;
+            filter: blur(2px);
+        }
+        
+        .ball-1 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #e94269 0%, #ff869a 100%);
+            opacity: 0.3;
+            top: 10%;
+            left: 10%;
+            animation: floatBall 10s infinite alternate ease-in-out;
+        }
+        
+        .ball-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #65558f 0%, #9a8bc5 100%);
+            opacity: 0.3;
+            bottom: 10%;
+            right: 10%;
+            animation: floatBall2 8s infinite alternate ease-in-out;
+        }
+        
+        .ball-3 {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ff869a 0%, #ffb7c5 100%);
+            opacity: 0.4;
+            top: 40%;
+            right: 20%;
+            animation: floatBall3 6s infinite alternate ease-in-out;
+        }
+        
+        .ball-4 {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #9a8bc5 0%, #c5b8e0 100%);
+            opacity: 0.3;
+            bottom: 20%;
+            left: 20%;
+            animation: floatBall4 7s infinite alternate ease-in-out;
+        }
+        
+        .ball-5 {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e94269 0%, #ff869a 100%);
+            opacity: 0.2;
+            top: 60%;
+            left: 40%;
+            animation: floatBall5 5s infinite alternate ease-in-out;
+        }
+        
+        @keyframes floatBall {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(100px, 50px) scale(1.1);
+            }
+        }
+        
+        @keyframes floatBall2 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-80px, -50px) scale(0.9);
+            }
+        }
+        
+        @keyframes floatBall3 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-60px, 80px) scale(1.2);
+            }
+        }
+        
+        @keyframes floatBall4 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(70px, -60px) scale(0.8);
+            }
+        }
+        
+        @keyframes floatBall5 {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-40px, 30px) scale(1.3);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-ball ball-1"></div>
+    <div class="animated-ball ball-2"></div>
+    <div class="animated-ball ball-3"></div>
+    <div class="animated-ball ball-4"></div>
+    <div class="animated-ball ball-5"></div>
+
+    <div class="container">
+        <h2>Live Video Stream</h2>
+        <video id="videoPlayer" autoplay playsinline></video>
+        
+        <button onclick="location.href='monitor.html'">Back</button>
+    </div>
+
+    <script>
+        // Get the video element
+        const video = document.getElementById("videoPlayer");
+
+        // Function to start the camera stream
+        async function startCamera() {
+            try {
+                // Request access to the camera
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: true, // Request video stream
+                    audio: false  // No audio for now; set to true if you need audio
+                });
+
+                // Set the video element's source to the camera stream
+                video.srcObject = stream;
+            } catch (error) {
+                console.error("Error accessing the camera: ", error);
+                alert("Could not access the camera. Please ensure you have a camera connected and have granted permission.");
+            }
+        }
+
+        // Start the camera when the page loads
+        window.onload = startCamera;
+    </script>
+</body>
+</html>

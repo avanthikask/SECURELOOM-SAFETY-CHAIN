@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Contact Alert</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .alert-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+        button {
+            background-color: #5d4a8e;
+            color: white;
+            padding: 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 20px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 280px;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #4b3a72;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="alert-container">
+        <h2>Emergency Alert</h2>
+        <p><strong>[User Name]</strong>  is in danger and has sent you an alert. Immediate action may be needed.</p>
+        <button onclick="callEmergency()">Call 181</button>
+        <button onclick="seeLocation()">See Live Location</button>
+    </div>
+
+    <script>
+        function callEmergency() {
+            window.location.href = "tel:181";
+        }
+
+        function seeLocation() {
+            window.location.href = "your-live-location-url";
+        }
+        setTimeout(showAlert, 5000); // Example: Show alert after 5 seconds
+    </script>
+</body>
+</html>
